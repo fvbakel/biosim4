@@ -285,7 +285,50 @@ std::pair<bool, float> passedSurvivalCriterion(const Indiv &indiv, unsigned chal
                 return { false, 0.0 };
             }
         }
+    // Survivors are those with exactly one neighbor which has no other neighbor
+    case CHALLENGE_PAIRS_NO_EDGE ... 159:
+        {
+            bool onEdge = indiv.loc.x == 0 || indiv.loc.x == p.sizeX - 1
+                       || indiv.loc.y == 0 || indiv.loc.y == p.sizeY - 1;
 
+            if (onEdge) {
+                return { false, 0.0 };
+            }
+
+            unsigned int min_count = 1;
+            unsigned int max_count = challenge - CHALLENGE_PAIRS_NO_EDGE;
+            if (min_count > max_count ) {
+                max_count = min_count; 
+            }
+
+            unsigned count = 0;
+            for (int16_t x = indiv.loc.x - 1; x < indiv.loc.x + 1; ++x) {
+                for (int16_t y = indiv.loc.y - 1; y < indiv.loc.y + 1; ++y) {
+                    Coord tloc = { x, y };
+                    if (tloc != indiv.loc && grid.isInBounds(tloc) && grid.isOccupiedAt(tloc)) {
+                        ++count;
+        /*                if (count == 1) {
+                            for (int16_t x1 = tloc.x - 1; x1 < tloc.x + 1; ++x1) {
+                                for (int16_t y1 = tloc.y - 1; y1 < tloc.y + 1; ++y1) {
+                                    Coord tloc1 = { x1, y1 };
+                                    if (tloc1 != tloc && tloc1 != indiv.loc && grid.isInBounds(tloc1) && grid.isOccupiedAt(tloc1)) {
+                                        return { false, 0.0 };
+                                    }
+                                }
+                            }
+                        } else {
+                            return { false, 0.0 };
+                        }
+                        */
+                    }
+                }
+            }
+            if (count >= min_count and count <=max_count) {
+                return { true, 1.0 -(count/max_count) };
+            } else {
+                return { false, 0.0 };
+            }
+        }
     // Survivors are those that contacted one or more specified locations in a sequence,
     // ranked by the number of locations contacted. There will be a bit set in their
     // challengeBits member for each location contacted.

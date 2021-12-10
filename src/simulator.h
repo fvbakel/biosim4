@@ -33,6 +33,7 @@ constexpr unsigned CHALLENGE_TOUCH_ANY_WALL = 12;
 constexpr unsigned CHALLENGE_EAST_WEST_EIGHTHS = 13;
 constexpr unsigned CHALLENGE_NEAR_BARRIER = 14;
 constexpr unsigned CHALLENGE_PAIRS = 15;
+constexpr unsigned CHALLENGE_PAIRS_NO_EDGE = 150;
 constexpr unsigned CHALLENGE_LOCATION_SEQUENCE = 16;
 constexpr unsigned CHALLENGE_ALTRUISM = 17;
 constexpr unsigned CHALLENGE_ALTRUISM_SACRIFICE = 18;

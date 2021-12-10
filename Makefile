@@ -98,7 +98,7 @@ $(OBJDIR_DEBUG)/src/genome-compare.o: src/genome-compare.cpp
 
 $(OBJDIR_DEBUG)/src/analysis.o: src/analysis.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c src/analysis.cpp -o $(OBJDIR_DEBUG)/src/analysis.o
-
+LDFLAGS_RELEASE
 $(OBJDIR_DEBUG)/src/basicTypes.o: src/basicTypes.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c src/basicTypes.cpp -o $(OBJDIR_DEBUG)/src/basicTypes.o
 

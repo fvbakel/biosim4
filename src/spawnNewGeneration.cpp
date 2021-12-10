@@ -176,6 +176,8 @@ unsigned spawnNewGeneration(unsigned generation, unsigned murderCount)
 
     std::cout << "Gen " << generation << ", " << parentGenomes.size() << " survivors" << std::endl;
     appendEpochLog(generation, parentGenomes.size(), murderCount);
+
+    // TODO: FRBA save goes here!
     //displaySignalUse(); // for debugging only
 
     // Now we have a container of zero or more parents' genomes
@@ -191,5 +193,18 @@ unsigned spawnNewGeneration(unsigned generation, unsigned murderCount)
 
     return parentGenomes.size();
 }
+
+/*
+void save_gnomes(std::vector<Genome> &genomes) {
+    for (Genome genome : genomes) {
+    gene.sourceType = 
+    gene.sourceNum = 
+    gene.sinkType = 
+    gene.sinkNum = 
+    gene.weight = 
+    }
+
+}
+*/
 
 } // end namespace BS

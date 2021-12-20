@@ -175,6 +175,11 @@ unsigned spawnNewGeneration(unsigned generation, unsigned murderCount)
         parentGenomes.push_back(peeps[parent.first].genome);
     }
 
+    if ((generation % p.videoStride) == 0) {
+        GenomeFileHandler genome_file_handler;
+        genome_file_handler.saveGenomes(generation,&parentGenomes);
+    }
+
     std::cout << "Gen " << generation << ", " << parentGenomes.size() << " survivors" << std::endl;
     appendEpochLog(generation, parentGenomes.size(), murderCount);
     //displaySignalUse(); // for debugging only

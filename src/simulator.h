@@ -10,6 +10,7 @@
 #include "signals.h"      // a 2D array of pheromones that overlay the world grid
 #include "peeps.h"        // the 2D world where the peeps live
 #include "random.h"
+#include "load-and-save.h"
 
 namespace BS {
 

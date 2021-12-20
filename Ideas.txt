@@ -1,0 +1,23 @@
+- have a GUI
+- save and load a generation from disk and start from there
+- dump sample gnomes to separate files and create images for each
+- what does survivors mean in stdout?
+- draw the save zone on the images
+- remove the dependency of img.h
+- graphs in real time
+- pause
+- population grow and shrink
+- show survivors in video
+- memory neurons
+- video new record of survivors
+- save population and load back
+- load back mixed populations
+- setup challenge sequence
+- multiple survival options in one population
+- sexual reproduction with only close related members
+- neurons histogram
+- neural network dump to file
+- analyse neural net based on a saved file
+- follow one creature with a square
+- dump end state picture
+- refactor to classes

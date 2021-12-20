@@ -67,6 +67,7 @@ struct Params {
     std::string logDir;
     std::string imageDir;
     std::string graphLogUpdateCommand;
+    std::string loadFile;
 };
 
 class ParamManager {

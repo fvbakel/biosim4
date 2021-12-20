@@ -20,6 +20,7 @@
 namespace BS {
 
 extern void initializeGeneration0();
+extern void initializeNewGeneration(const std::vector<Genome> &parentGenomes, unsigned generation);
 extern unsigned spawnNewGeneration(unsigned generation, unsigned murderCount);
 extern void displaySampleGenomes(unsigned count);
 extern void executeActions(Indiv &indiv, std::array<float, Action::NUM_ACTIONS> &actionLevels);
@@ -130,7 +131,17 @@ void simulator(int argc, char **argv)
     //unitTestGridVisitNeighborhood();
 
     unsigned generation = 0;
-    initializeGeneration0(); // starting population
+    if (p.loadFile.empty() || p.loadFile == "false") {
+        initializeGeneration0(); // starting population
+    } else {
+        GenomeFileHandler genome_file_handler;
+        std::vector<Genome> parentGenomes;
+        std::cout << "Loading generation 0 from file: "  << p.loadFile << std::endl;
+        
+        genome_file_handler.loadGenomes(p.loadFile,&parentGenomes);
+        initializeNewGeneration(parentGenomes,0);
+        
+    }
     runMode = RunMode::RUN;
     unsigned murderCount;
 

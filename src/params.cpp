@@ -31,6 +31,7 @@ void ParamManager::setDefaults()
     privParams.genomeMaxLength = 300;
     privParams.logDir = "./logs/";
     privParams.imageDir = "./images/";
+    privParams.loadFile = "";
     privParams.population = 3000;
     privParams.stepsPerGeneration = 300;
     privParams.maxGenerations = 200000;
@@ -155,6 +156,9 @@ void ParamManager::ingestParameter(std::string name, std::string val)
         }
         else if (name == "imagedir") {
             privParams.imageDir = val; break;
+        }
+        else if (name == "loadfile") {
+            privParams.loadFile = val; break;
         }
         else if (name == "population" && isUint && uVal > 0 && uVal < (uint32_t)-1) {
             privParams.population = uVal; break;

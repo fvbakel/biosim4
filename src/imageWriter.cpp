@@ -203,11 +203,11 @@ void ImageWriter::saveGenerationVideo(unsigned generation)
         std::stringstream videoFilename;
         videoFilename << p.imageDir.c_str() << "/gen-"
                       << std::setfill('0') << std::setw(6) << generation
-                      << ".avi";
+                      << p.videoExtension;
         cv::setNumThreads(2);
         imageList.save_video(videoFilename.str().c_str(),
                              25,
-                             "H264");
+                             p.videoEncoding.c_str());
         if (skippedFrames > 0) {
             std::cout << "Video skipped " << skippedFrames << " frames" << std::endl;
         }

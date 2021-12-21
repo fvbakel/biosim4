@@ -49,6 +49,7 @@ struct Params {
     unsigned agentSize;
     unsigned genomeAnalysisStride; // > 0
     unsigned displaySampleGenomes; // >= 0
+    bool sampleGenomesToFile;
     unsigned genomeComparisonMethod; // 0 = Jaro-Winkler; 1 = Hamming
     bool updateGraphLog;
     unsigned updateGraphLogStride; // > 0
@@ -68,6 +69,8 @@ struct Params {
     std::string imageDir;
     std::string graphLogUpdateCommand;
     std::string loadFile;
+    std::string videoExtension;
+    std::string videoEncoding;
 };
 
 class ParamManager {

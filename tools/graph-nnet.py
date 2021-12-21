@@ -76,14 +76,24 @@ def make_graph(filename):
     igraph.plot(g, output_filename, edge_curved=True, bbox=bbox, margin=64, layout=layout)
 
 
+def process_dir(input_dir):
+    for filename in os.listdir(input_dir):
+        if filename.endswith(".txt"):
+            make_graph(os.path.join(input_dir, filename))
+
 if __name__ == "__main__":
     parser = ArgumentParser(description="Convert a net txt file to a graph\n")
-    requiredNamed = parser.add_argument_group('required arguments')
-    requiredNamed.add_argument("--file", "-f", help="Filename of the net txt file", type=str, required=True)
+    #requiredNamed = parser.add_argument_group('required arguments')
+    parser.add_argument("--file", "-f", help="Filename of the net txt file", type=str,default="net.txt")
+    parser.add_argument("--dir", "-d", help="Directory with net txt files", type=str,default=None)
 
     args = parser.parse_args()
     filename =args.file
+    dirname =args.dir
 
-    make_graph(filename)
+    if dirname is None:
+        make_graph(filename)
+    else:
+        process_dir(dirname)
 
 

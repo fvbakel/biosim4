@@ -32,6 +32,8 @@ void ParamManager::setDefaults()
     privParams.logDir = "./logs/";
     privParams.imageDir = "./images/";
     privParams.loadFile = "";
+    privParams.videoExtension = "avi";
+    privParams.videoEncoding = "H264";
     privParams.population = 3000;
     privParams.stepsPerGeneration = 300;
     privParams.maxGenerations = 200000;
@@ -61,6 +63,7 @@ void ParamManager::setDefaults()
     privParams.agentSize = 4;
     privParams.genomeAnalysisStride = privParams.videoStride;
     privParams.displaySampleGenomes = 5;
+    privParams.sampleGenomesToFile = false;
     privParams.genomeComparisonMethod = 1;
     privParams.updateGraphLog = true;
     privParams.updateGraphLogStride = privParams.videoStride;
@@ -160,6 +163,12 @@ void ParamManager::ingestParameter(std::string name, std::string val)
         else if (name == "loadfile") {
             privParams.loadFile = val; break;
         }
+        else if (name == "videoencoding") {
+            privParams.videoEncoding = val; break;
+        }
+        else if (name == "videoextension") {
+            privParams.videoExtension = val; break;
+        }
         else if (name == "population" && isUint && uVal > 0 && uVal < (uint32_t)-1) {
             privParams.population = uVal; break;
         }
@@ -252,6 +261,9 @@ void ParamManager::ingestParameter(std::string name, std::string val)
         }
         else if (name == "displaysamplegenomes" && isUint) {
             privParams.displaySampleGenomes = uVal; break;
+        }
+        else if (name == "samplegenomestofile" && isBool) {
+            privParams.sampleGenomesToFile = bVal; break;
         }
         else if (name == "genomecomparisonmethod" && isUint) {
             privParams.genomeComparisonMethod = uVal; break;

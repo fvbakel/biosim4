@@ -1,6 +1,7 @@
 // analysis.cpp -- various reports
 
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <fstream>
 #include <cassert>
@@ -230,24 +231,25 @@ void Indiv::printGenome() const
 
 // This prints a neural net in a form that can be processed with
 // graph-nnet.py to produce a graphic illustration of the net.
-void Indiv::printIGraphEdgeList() const
+void Indiv::printIGraphEdgeList(std::ostream &output_stream) const
 {
+
     for (auto & conn : nnet.connections) {
         if (conn.sourceType == SENSOR) {
-            std::cout << sensorShortName((Sensor)(conn.sourceNum));
+            output_stream << sensorShortName((Sensor)(conn.sourceNum));
         } else {
-            std::cout << "N" << std::to_string(conn.sourceNum);
+            output_stream << "N" << std::to_string(conn.sourceNum);
         }
 
-        std::cout << " ";
+        output_stream << " ";
 
         if (conn.sinkType == ACTION) {
-            std::cout << actionShortName((Action)(conn.sinkNum));
+            output_stream << actionShortName((Action)(conn.sinkNum));
         } else {
-            std::cout << "N" << std::to_string(conn.sinkNum);
+            output_stream << "N" << std::to_string(conn.sinkNum);
         }
 
-        std::cout << " " << std::to_string(conn.weight) << std::endl;
+        output_stream << " " << std::to_string(conn.weight) << std::endl;
     }
 }
 
@@ -351,17 +353,33 @@ void displaySensorActionReferenceCounts()
 }
 
 
-void displaySampleGenomes(unsigned count)
+void displaySampleGenomes(unsigned int generation,unsigned count)
 {
     unsigned index = 1; // indexes start at 1
+
     for (index = 1; count > 0 && index <= p.population; ++index) {
         if (peeps[index].alive) {
+
             std::cout << "---------------------------\nIndividual ID " << index << std::endl;
             peeps[index].printGenome();
             std::cout << std::endl;
 
-            //peeps[index].printNeuralNet();
-            peeps[index].printIGraphEdgeList();
+            if (p.sampleGenomesToFile) {
+                std::ofstream output_file;
+                std::stringstream filename;
+                filename << p.imageDir.c_str() << "/gen-"
+                            << std::setfill('0') << std::setw(6) << generation
+                            << "-" << index 
+                            << "-net.txt";
+
+                output_file.open (filename.str().c_str(),std::ios::out);
+
+                peeps[index].printIGraphEdgeList(output_file);
+
+                output_file.close();
+            } else {
+                peeps[index].printIGraphEdgeList(std::cout);
+            }
 
 
             std::cout << "---------------------------" << std::endl;

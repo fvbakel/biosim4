@@ -10,8 +10,6 @@ else
   exit
 fi
 
-# better quality: ffmpeg -i gen-000900.avi -codec:v libtheora -qscale:v 3 -f ogv gen-000900-1.ogv
-
 FILES=`find -L ${process_dir} -name "${file_filter}"`
 for file in $FILES
 do

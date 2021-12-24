@@ -10,10 +10,10 @@ def write_header(output_file):
     <html>
     <head>
         <style>
-        table, th, td {
+        table, th, td {{
           border: 1px solid black;
           border-collapse: collapse;
-        }
+        }}
         </style>
     </head>
     <body>
@@ -28,15 +28,13 @@ def write_header(output_file):
 def write_footer(output_file):
     output_file.write('</body></html>')
 
-def write_video_cell(output_file,video_filename):
+def write_video(output_file,video_filename):
     html_code = f"""
-        <td>
             <video class="tab" controls
             height="400"
             width="400">
                 <source src="{video_filename}"/>
               </video>
-        </td>
     """
     output_file.write(html_code)
 
@@ -64,9 +62,10 @@ def process_generation(output_file,input_dir,video_filename,video_extension):
     #output_file.write("<tr><td>")
     
     #output_file.write("</td></tr>")
-    output_file.write("<tr>")
+    output_file.write("<tr><td>")
     output_file.write(f"<h2>Generation: {generation}</h2>")
-    write_video_cell(output_file,video_filename)
+    write_video(output_file,video_filename)
+    output_file.write("</td>")
     
     process_net_files(output_file,input_dir,generation_prefix)
     output_file.write("</tr>")

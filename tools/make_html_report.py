@@ -7,7 +7,16 @@ net_extension = ".svg"
 
 def write_header(output_file):
     html_code = f"""
-        <html>
+    <html>
+    <head>
+        <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        </style>
+    </head>
+    <body>
         <h1>Biosim report</h1>
         <img 
             src="{survivor_graph}" 
@@ -17,7 +26,7 @@ def write_header(output_file):
 
 
 def write_footer(output_file):
-    output_file.write('</html>')
+    output_file.write('</body></html>')
 
 def write_video_cell(output_file,video_filename):
     html_code = f"""
@@ -52,10 +61,11 @@ def process_generation(output_file,input_dir,video_filename,video_extension):
     generation_prefix = video_filename.replace(video_extension,'')
     generation = generation_prefix.replace('gen-','')
     
-    output_file.write("<tr><td>")
-    output_file.write(f"<h2>Generation: {generation}</h2>")
-    output_file.write("</td></tr>")
+    #output_file.write("<tr><td>")
+    
+    #output_file.write("</td></tr>")
     output_file.write("<tr>")
+    output_file.write(f"<h2>Generation: {generation}</h2>")
     write_video_cell(output_file,video_filename)
     
     process_net_files(output_file,input_dir,generation_prefix)

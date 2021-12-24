@@ -78,7 +78,7 @@ def make_graph(filename):
 
 def process_dir(input_dir):
     for filename in os.listdir(input_dir):
-        if filename.endswith(".txt"):
+        if filename.endswith("net.txt"):
             make_graph(os.path.join(input_dir, filename))
 
 if __name__ == "__main__":
